@@ -31,8 +31,16 @@ func main() {
 	p1 := P1{"山田太郎"}
 	book := Book{title: "我輩は猫である"}
 
-	p1.PrintOut()
-	book.PrintOut()
+	PrintOut(p1)
+	PrintOut(book)
+}
+
+type Printable interface {
+	ToString() string
+}
+
+func PrintOut(p Printable) {
+	fmt.Println(p.ToString())
 }
 
 type P1 struct {
@@ -43,18 +51,10 @@ func (p P1) ToString() string {
 	return p.name
 }
 
-func (p P1) PrintOut() {
-	fmt.Println(p.ToString())
-}
-
 type Book struct {
 	title string
 }
 
 func (b Book) ToString() string {
 	return b.title
-}
-
-func (b Book) PrintOut() {
-	fmt.Println(b.ToString())
 }
